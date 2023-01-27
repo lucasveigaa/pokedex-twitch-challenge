@@ -8,5 +8,7 @@ export const useGetPokemon = (uri: string) => {
         return data
     }
 
-    return useQuery([uri], () => fetchPokemon())
+    return useQuery([uri], () => fetchPokemon(), {
+        refetchOnWindowFocus: false,
+    })
 }

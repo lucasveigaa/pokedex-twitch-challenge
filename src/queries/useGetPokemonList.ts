@@ -13,5 +13,6 @@ export const useGetPokemonList = () => {
         queryFn: ({ pageParam }) => getPokemonList(pageParam),
         getNextPageParam: (lastPage) => lastPage.next ?? undefined,
         getPreviousPageParam: (previousPage) => previousPage ?? undefined,
+        refetchOnWindowFocus: false,
     })
 }
