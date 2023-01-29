@@ -1,7 +1,16 @@
+import { useState } from 'react'
+
 import { PokemonCard, LoadingStatus, ThemeToggler } from '@/components'
-import { useGetPokemonList } from '@/queries/useGetPokemonList'
+import { useDebounce } from '@/hooks'
+import { useGetPokemonList } from '@/queries'
 
 export default function Home() {
+    const [searchPokemon, setSearchPokemon] = useState('')
+
+    const searchPokemonDebounced = useDebounce(
+        searchPokemon.toLocaleLowerCase()
+    )
+
     const { data, fetchNextPage, hasNextPage, refetch, isFetching } =
         useGetPokemonList()
 
@@ -12,13 +21,23 @@ export default function Home() {
             </h1>
 
             <div className="flex flex-col sm:flex-row gap-4 items-center sm:justify-between">
-                <input placeholder="Pesquise por um nome ou ID" />
+                <input
+                    onChange={(e) => setSearchPokemon(e.target.value)}
+                    placeholder="Pesquise por um nome ou ID"
+                />
                 <ThemeToggler />
             </div>
 
+            <PokemonCard url={`pokemon/${searchPokemonDebounced}`} />
+
             <div className="flex items-center justify-center sm:justify-between py-10 gap-4 flex-wrap ">
                 {data?.pages.map((page) =>
-                    page.results.map((pokemon) => <PokemonCard {...pokemon} />)
+                    page.results.map((pokemon) => (
+                        <PokemonCard
+                            url={pokemon.url}
+                            pokemonName={pokemon.name}
+                        />
+                    ))
                 )}
             </div>
 

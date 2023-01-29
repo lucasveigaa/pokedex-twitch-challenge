@@ -1,8 +1,15 @@
 import { useGetPokemon } from '@/queries/useGetPokemon'
 import { TPokemonListEndpointResult } from '../../interfaces'
 
-export const PokemonCard = (pokemon: TPokemonListEndpointResult) => {
-    const { data, isFetching, isError, refetch } = useGetPokemon(pokemon.url)
+interface PokemonCardProps {
+    url: string
+    pokemonName?: string
+}
+
+export const PokemonCard = ({ url, pokemonName }: PokemonCardProps) => {
+    const { data, isFetching, isError, refetch } = useGetPokemon(url)
+
+    if (!data?.id) return null
 
     if (isError)
         return (
@@ -30,11 +37,11 @@ export const PokemonCard = (pokemon: TPokemonListEndpointResult) => {
         )
 
     return (
-        <div className="flex flex-col items-center justify-center min-w-[320px] py-4 rounded-lg bg-sun-400 dark:bg-sun-300">
+        <div className="flex flex-col items-center justify-center w-[320px] py-4 rounded-lg bg-sun-400 dark:bg-sun-300">
             <img
                 loading="lazy"
                 className="w-16 h-16"
-                alt={`Imagem do pokemon ${pokemon.name}`}
+                alt={`Imagem do pokemon ${pokemonName || data?.name}`}
                 src={
                     data?.sprites?.versions?.['generation-v']?.['black-white']
                         ?.animated.front_default ||
@@ -42,7 +49,7 @@ export const PokemonCard = (pokemon: TPokemonListEndpointResult) => {
                 }
             />
             <span className="uppercase mt-3 text-xs text-white font-normal">
-                {pokemon.name}
+                {pokemonName || data?.name}
             </span>
         </div>
     )
