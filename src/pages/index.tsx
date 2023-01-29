@@ -15,7 +15,7 @@ export default function Home() {
         useGetPokemonList()
 
     return (
-        <div className="bg-sun-50 px-4 sm:px-8 lg:px-36 min-h-screen dark:bg-black">
+        <div className="transition-colors bg-fixed animate-infinityParallax pattern-cross pattern-white dark:pattern-white pattern-bg-sun-50 dark:pattern-sun-300 dark:pattern-bg-sun-500 pattern-size-6 pattern-opacity-100 px-4 sm:px-8 lg:px-36 min-h-screen">
             <h1 className="flex justify-center pt-12 pb-10 text-xl sm:text-3xl lg:text-4xl text-sun-400 dark:text-white animate-bounce transition-all">
                 Lista de Pokémons
             </h1>
