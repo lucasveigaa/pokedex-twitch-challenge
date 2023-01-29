@@ -1,5 +1,5 @@
 import { useGetPokemon } from '@/queries/useGetPokemon'
-import { TPokemonListEndpointResult } from '../../interfaces'
+import { isAxiosError } from 'axios'
 
 interface PokemonCardProps {
     url: string
@@ -7,9 +7,19 @@ interface PokemonCardProps {
 }
 
 export const PokemonCard = ({ url, pokemonName }: PokemonCardProps) => {
-    const { data, isFetching, isError, refetch } = useGetPokemon(url)
+    const { data, isFetching, isError, error, refetch } = useGetPokemon(url)
 
-    if (!data?.id) return null
+    if (isAxiosError(error)) {
+        if (error.response?.status === 404) {
+            return (
+                <div className="w-[320px] min-h-[124px] bg-sun-400 dark:bg-sun-300 shadow rounded-lg text-white text-xs p-4 flex flex-col gap-4 text-center items-center justify-center pt-7">
+                    Pokémon não encontrado
+                </div>
+            )
+        }
+    }
+
+    if (!isFetching && !data?.id) return null
 
     if (isError)
         return (

@@ -1,9 +1,11 @@
 import { TPokemonListEndpoint } from '@/interfaces'
-import { api } from '@/services/axios'
+import { requester } from '@/services/axios'
 import { useInfiniteQuery } from 'react-query'
 
 const getPokemonList = async (page: string): Promise<TPokemonListEndpoint> => {
-    const { data } = await api.get<TPokemonListEndpoint>(page || '/pokemon')
+    const { data } = await requester().get<TPokemonListEndpoint>(
+        page || '/pokemon'
+    )
     return data
 }
 

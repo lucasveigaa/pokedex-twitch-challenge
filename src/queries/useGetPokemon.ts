@@ -1,10 +1,10 @@
 import { TPokemonContentEndpoint } from '@/interfaces'
-import { api } from '@/services/axios'
+import { requester } from '@/services/axios'
 import { useQuery } from 'react-query'
 
 export const useGetPokemon = (uri: string) => {
     const fetchPokemon = async (): Promise<TPokemonContentEndpoint> => {
-        const { data } = await api.get<TPokemonContentEndpoint>(uri)
+        const { data } = await requester().get<TPokemonContentEndpoint>(uri)
         return data
     }
 

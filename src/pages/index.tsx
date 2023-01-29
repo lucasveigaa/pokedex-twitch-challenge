@@ -28,7 +28,9 @@ export default function Home() {
                 <ThemeToggler />
             </div>
 
-            <PokemonCard url={`pokemon/${searchPokemonDebounced}`} />
+            <div className="mt-8">
+                <PokemonCard url={`pokemon/${searchPokemonDebounced}`} />
+            </div>
 
             <div className="flex items-center justify-center sm:justify-between py-10 gap-4 flex-wrap ">
                 {data?.pages.map((page) =>
