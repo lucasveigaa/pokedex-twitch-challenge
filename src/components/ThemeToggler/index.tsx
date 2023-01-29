@@ -14,9 +14,9 @@ export const ThemeToggler = () => {
             aria-label="Toggle Dark Mode"
         >
             {theme === 'light' ? (
-                <MoonIcon className="text-blue-500 w-5 h-5" />
+                <MoonIcon className="text-blue-500 w-6 h-6" />
             ) : (
-                <SunIcon className="text-blue-400 w-5 h-5" />
+                <SunIcon className="text-blue-400 w-6 h-6" />
             )}
         </button>
     )

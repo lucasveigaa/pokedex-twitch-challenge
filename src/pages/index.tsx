@@ -20,15 +20,22 @@ export default function Home() {
                 Lista de Pokémons
             </h1>
 
-            <div className="flex flex-col sm:flex-row gap-4 items-center sm:justify-between">
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center relative">
                 <input
+                    className="peer py-3 pl-4 w-[320px] bg-sun-400 dark:bg-sun-300 text-white text-sm rounded-lg border-2 border-dashed border-sun-300 placeholder:text-xs"
                     onChange={(e) => setSearchPokemon(e.target.value)}
-                    placeholder="Pesquise por um nome ou ID"
+                    placeholder="Procure nome ou ID"
                 />
-                <ThemeToggler />
+                <div className="absolute right-0">
+                    <ThemeToggler />
+                </div>
             </div>
 
-            <div className="mt-8">
+            <div
+                className={`flex justify-center  ${
+                    searchPokemonDebounced && 'mt-8'
+                }`}
+            >
                 <PokemonCard url={`pokemon/${searchPokemonDebounced}`} />
             </div>
 
