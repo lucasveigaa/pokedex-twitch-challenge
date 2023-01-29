@@ -1,4 +1,4 @@
-import { PokemonCard, LoadingStatus } from '@/components'
+import { PokemonCard, LoadingStatus, ThemeToggler } from '@/components'
 import { useGetPokemonList } from '@/queries/useGetPokemonList'
 
 export default function Home() {
@@ -6,12 +6,17 @@ export default function Home() {
         useGetPokemonList()
 
     return (
-        <div className="bg-sun-50 min-h-screen">
-            <h1 className="flex justify-center pt-14 text-4xl text-sun-400 animate-bounce transition-all">
+        <div className="bg-sun-50 px-4 sm:px-8 lg:px-36 min-h-screen dark:bg-black">
+            <h1 className="flex justify-center pt-12 pb-10 text-xl sm:text-3xl lg:text-4xl text-sun-400 dark:text-white animate-bounce transition-all">
                 Lista de Pokémons
             </h1>
 
-            <div className="flex items-center justify-center py-10 gap-4 flex-wrap ">
+            <div className="flex flex-col sm:flex-row gap-4 items-center sm:justify-between">
+                <input placeholder="Pesquise por um nome ou ID" />
+                <ThemeToggler />
+            </div>
+
+            <div className="flex items-center justify-center sm:justify-between py-10 gap-4 flex-wrap ">
                 {data?.pages.map((page) =>
                     page.results.map((pokemon) => <PokemonCard {...pokemon} />)
                 )}
