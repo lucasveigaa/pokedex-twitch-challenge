@@ -1,5 +1,7 @@
 import { useGetPokemon } from '@/queries/useGetPokemon'
 import { isAxiosError } from 'axios'
+import pokemonType from './pokemonTypes'
+import { Chart, Modal } from '..'
 
 interface PokemonCardProps {
     url: string
@@ -49,20 +51,79 @@ export const PokemonCard = ({ url, pokemonName }: PokemonCardProps) => {
         )
 
     return (
-        <div className="flex flex-col items-center justify-center w-[320px] py-4 rounded-lg bg-sun-400 dark:bg-sun-300">
-            <img
-                loading="lazy"
-                className="w-16 h-16"
-                alt={`Imagem do pokemon ${pokemonName || data?.name}`}
-                src={
-                    data?.sprites?.versions?.['generation-v']?.['black-white']
-                        ?.animated.front_default ||
-                    data?.sprites?.other?.['official-artwork']?.front_default
+        <div className="flex">
+            <Modal
+                modalTrigger={
+                    <button className="flex flex-col cursor-pointer items-center justify-center w-[320px] py-4 rounded-lg bg-sun-400 dark:bg-sun-300">
+                        <img
+                            loading="lazy"
+                            className="w-16 h-16"
+                            alt={`Imagem do pokemon ${
+                                pokemonName || data?.name
+                            }`}
+                            src={
+                                data?.sprites?.versions?.['generation-v']?.[
+                                    'black-white'
+                                ]?.animated.front_default ||
+                                data?.sprites?.other?.['official-artwork']
+                                    ?.front_default
+                            }
+                        />
+                        <span className="uppercase mt-3 text-xs text-white font-normal">
+                            {pokemonName || data?.name}
+                        </span>
+                    </button>
                 }
-            />
-            <span className="uppercase mt-3 text-xs text-white font-normal">
-                {pokemonName || data?.name}
-            </span>
+                title={pokemonName!}
+            >
+                <div className="flex flex-col items-start justify-start">
+                    <div className="w-full min-h-[400px] flex flex-wrap gap-5 items-center justify-center">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div>
+                                <img
+                                    loading="lazy"
+                                    className="h-52 w-52"
+                                    src={
+                                        data?.sprites?.other?.home
+                                            ?.front_default ||
+                                        data?.sprites?.other?.[
+                                            'official-artwork'
+                                        ]?.front_default
+                                    }
+                                    alt={`Pokémon ${data?.name}`}
+                                />
+                                <div className="flex justify-center md:justify-start gap-2 flex-wrap">
+                                    {data?.types?.map((type, index) => (
+                                        <div
+                                            key={`${type.type.name}-${index}`}
+                                            className="p-2 rounded-md shadow-lg text-sm mt-8"
+                                            style={{
+                                                backgroundColor: `${
+                                                    pokemonType?.[
+                                                        type?.type.name
+                                                    ]
+                                                }`,
+                                            }}
+                                        >
+                                            {type?.type.name}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="flex justify-center items-center md:h-96 md:w-96 h-60 w-60">
+                                <Chart
+                                    data={
+                                        data?.stats?.map((item) => ({
+                                            subject: item.stat?.name,
+                                            stats: item.base_stat,
+                                        }))!
+                                    }
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }
