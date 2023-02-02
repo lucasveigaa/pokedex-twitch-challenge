@@ -1,3 +1,5 @@
+export * from './Chart'
 export * from './Icons'
+export * from './Modal'
 export * from './PokemonCard'
 export * from './ThemeToggler'
