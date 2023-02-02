@@ -92,11 +92,11 @@ export const PokemonCard = ({ url, pokemonName }: PokemonCardProps) => {
                                     }
                                     alt={`Pokémon ${data?.name}`}
                                 />
-                                <div className="flex justify-center md:justify-start gap-2 flex-wrap">
+                                <div className="flex justify-center gap-2 flex-wrap">
                                     {data?.types?.map((type, index) => (
                                         <div
                                             key={`${type.type.name}-${index}`}
-                                            className="p-2 rounded-md shadow-lg text-sm mt-8"
+                                            className={`p-2 rounded-md shadow-lg text-sm mt-8`}
                                             style={{
                                                 backgroundColor: `${
                                                     pokemonType?.[
