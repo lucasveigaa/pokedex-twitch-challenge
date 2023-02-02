@@ -26,7 +26,7 @@ export const Chart = ({ data }: ChartProps) => {
                     fill="#003566"
                     fillOpacity={0.6}
                 />
-                <Tooltip />
+                <Tooltip labelStyle={{ color: '#000' }} />
             </RadarChart>
         </ResponsiveContainer>
     )

@@ -96,7 +96,7 @@ export const PokemonCard = ({ url, pokemonName }: PokemonCardProps) => {
                                     {data?.types?.map((type, index) => (
                                         <div
                                             key={`${type.type.name}-${index}`}
-                                            className={`p-2 rounded-md shadow-lg text-sm mt-8`}
+                                            className="p-2 text-white rounded-md shadow-lg text-sm mt-8"
                                             style={{
                                                 backgroundColor: `${
                                                     pokemonType?.[
