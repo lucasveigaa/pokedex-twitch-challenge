@@ -22,7 +22,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center relative">
                 <input
-                    className="peer py-3 pl-4 w-[320px] bg-sun-400 dark:bg-sun-300 text-white text-sm rounded-lg border-2 border-dashed border-sun-300 placeholder:text-xs"
+                    className="peer py-3 pl-4 w-[320px] bg-sun-400 dark:bg-sun-300 text-white text-sm rounded-lg placeholder:text-xs outline-0"
                     onChange={(e) => setSearchPokemon(e.target.value)}
                     placeholder="Procure nome ou ID"
                 />
