@@ -1,5 +1,6 @@
-import { useGetPokemon } from '@/queries/useGetPokemon'
 import { isAxiosError } from 'axios'
+
+import { useGetPokemon } from '@/queries'
 import pokemonType from './pokemonTypes'
 import { Chart, Modal } from '..'
 
